@@ -33,14 +33,14 @@ WebViewJavascriptBridge被一系列公司和项目使用。这是一个小而不
 三、安装 (iOS & OSX)
 ------------------------
 
-### 使用 CocoaPods 安装
+### 3.1  使用 CocoaPods 安装
 Add this to your [podfile](https://guides.cocoapods.org/using/getting-started.html) and run `pod install` to install:
 
 ```ruby
 pod 'WebViewJavascriptBridge', '~> 6.0'
 ```
 
-### 手动安装
+### 3.2  手动安装
 
 Drag the `WebViewJavascriptBridge` folder into your project.
 
@@ -56,7 +56,7 @@ To use a WebViewJavascriptBridge in your own project:
 五、用法
 -----
 
-1) Import the header file and declare an ivar property:
+1) 导入头文件并声明一个 ivar 属性：
 
 ```objc
 #import "WebViewJavascriptBridge.h"
@@ -68,13 +68,13 @@ To use a WebViewJavascriptBridge in your own project:
 @property WebViewJavascriptBridge* bridge;
 ```
 
-2) Instantiate WebViewJavascriptBridge with a WKWebView, UIWebView (iOS) or WebView (OSX):
+2)  WebViewJavascriptBridge实例 使用 WKWebView, UIWebView (iOS) 或 WebView (OSX):
 
 ```objc
 self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
 ```
 
-3) Register a handler in ObjC, and call a JS handler:
+3) 在 ObjC 中注册一个处理程序,  并调用一个 JS 处理程序:
 
 ```objc
 [self.bridge registerHandler:@"ObjC Echo" handler:^(id data, WVJBResponseCallback responseCallback) {
@@ -86,7 +86,7 @@ self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
 }];
 ```
 
-4) Copy and paste `setupWebViewJavascriptBridge` into your JS:
+4) 将 `setupWebViewJavascriptBridge` 复制粘贴到你的 JS 中:
 	
 ```javascript
 function setupWebViewJavascriptBridge(callback) {
@@ -101,7 +101,7 @@ function setupWebViewJavascriptBridge(callback) {
 }
 ```
 
-5) Finally, call `setupWebViewJavascriptBridge` and then use the bridge to register handlers and call ObjC handlers:
+5) 最后 调用 `setupWebViewJavascriptBridge` ，然后使用这个 bridge 去注册处理程序和调用 ObjC 处理程序:
 
 ```javascript
 setupWebViewJavascriptBridge(function(bridge) {
