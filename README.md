@@ -3,16 +3,16 @@ WebViewJavascriptBridge
 
 [![Circle CI](https://img.shields.io/circleci/project/github/marcuswestin/WebViewJavascriptBridge.svg)](https://circleci.com/gh/marcuswestin/WebViewJavascriptBridge)
 
-An iOS/OSX bridge for sending messages between Obj-C and JavaScript in WKWebViews, UIWebViews & WebViews.
+作为一个在IOS/OSX 下的WKWebViews, UIWebViews & WebViews 里Obj-C 和 JS 之间发送效益的桥；
 
-Migration Guide
+一、迁移指南
 ---------------
 
-When upgrading from v5.0.x to 6.0.x you will have to update the `setupWebViewJavascriptBridge` javascript snippet. See https://github.com/marcuswestin/WebViewJavascriptBridge#usage part 4).
+从v5.0.x升级到6.0.x时，您必须更新 `setupWebViewJavascriptBridge` javascript 片段。 请参阅 https://github.com/marcuswestin/WebViewJavascriptBridge#usage 第4部分).
 
-Who uses WebViewJavascriptBridge?
+二、谁需要使用 WebViewJavascriptBridge?
 ---------------------------------
-WebViewJavascriptBridge is used by a range of companies and projects. This is a small and incomplete sample list:
+WebViewJavascriptBridge被一系列公司和项目使用。这是一个小而不完整的样本列表：
 
 - [Facebook Messenger](https://www.facebook.com/mobile/messenger)
 - [Facebook Paper](https://facebook.com/paper)
@@ -30,30 +30,30 @@ WebViewJavascriptBridge is used by a range of companies and projects. This is a 
 - [BrowZine](http://thirdiron.com/browzine/)
 - ... & many more!
 
-Installation (iOS & OSX)
+三、安装 (iOS & OSX)
 ------------------------
 
-### Installation with CocoaPods
+### 使用 CocoaPods 安装
 Add this to your [podfile](https://guides.cocoapods.org/using/getting-started.html) and run `pod install` to install:
 
 ```ruby
 pod 'WebViewJavascriptBridge', '~> 6.0'
 ```
 
-### Manual installation
+### 手动安装
 
 Drag the `WebViewJavascriptBridge` folder into your project.
 
 In the dialog that appears, uncheck "Copy items into destination group's folder" and select "Create groups for any folders".
 
-Examples
+四、示例
 --------
 
 See the `Example Apps/` folder. Open either the iOS or OSX project and hit run to see it in action.
 
 To use a WebViewJavascriptBridge in your own project:
 
-Usage
+五、用法
 -----
 
 1) Import the header file and declare an ivar property:
@@ -118,7 +118,7 @@ setupWebViewJavascriptBridge(function(bridge) {
 })
 ```
 
-Automatic reference counting (ARC)
+六、自动参数计算 (ARC)
 ----------------------------------
 This library relies on ARC, so if you use ARC in you project, all works fine.
 But if your project have no ARC support, be sure to do next steps:
@@ -131,16 +131,16 @@ But if your project have no ARC support, be sure to do next steps:
 
 Now all WVJB files will be compiled with ARC support.
 
-Contributors & Forks
+七、Contributors & Forks
 --------------------
 Contributors: https://github.com/marcuswestin/WebViewJavascriptBridge/graphs/contributors
 
 Forks: https://github.com/marcuswestin/WebViewJavascriptBridge/network/members
 
-API Reference
+八、API 参考
 -------------
 
-### ObjC API
+## 8.1  ObjC API
 
 ##### `[WebViewJavascriptBridge bridgeForWebView:(WKWebVIew/UIWebView/WebView*)webview`
 
@@ -196,14 +196,13 @@ Example:
 
 
 
-### Javascript API
+## 8.2  Javascript API
 
-##### `bridge.registerHandler("handlerName", function(responseData) { ... })`
+### 8.2.1  `bridge.registerHandler("handlerName", function(responseData) { ... })`
 
-Register a handler called `handlerName`. The ObjC can then call this handler with `[bridge callHandler:"handlerName" data:@"Foo"]` and `[bridge callHandler:"handlerName" data:@"Foo" responseCallback:^(id responseData) { ... }]`
+注册一个名为 `handlerName` 的处理回调。 然后，Objc 可以通过使用 `[bridge callHandler:"handlerName" data:@"Foo"]` 和  `[bridge callHandler:"handlerName" data:@"Foo" responseCallback:^(id responseData) { ... }]`调用这个回调。
 
-Example:
-
+实例:
 ```javascript
 bridge.registerHandler("showAlert", function(data) { alert(data) })
 bridge.registerHandler("getCurrentPageUrl", function(data, responseCallback) {
@@ -212,13 +211,12 @@ bridge.registerHandler("getCurrentPageUrl", function(data, responseCallback) {
 ```
 
 
-##### `bridge.callHandler("handlerName", data)`
-##### `bridge.callHandler("handlerName", data, function responseCallback(responseData) { ... })`
+### 8.2.2  `bridge.callHandler("handlerName", data)`
+### 8.2.3  `bridge.callHandler("handlerName", data, function responseCallback(responseData) { ... })`
 
-Call an ObjC handler called `handlerName`. If a `responseCallback` function is given the ObjC handler can respond.
+调用一个名为 `handlerName` 的ObjC 处理函数。 如果给出六 `responseCallback` 函数， 则 ObjC 处理程序可以相应
 
-Example:
-
+实例:
 ```javascript
 bridge.callHandler("Log", "Foo")
 bridge.callHandler("getScreenHeight", null, function(response) {
@@ -227,12 +225,11 @@ bridge.callHandler("getScreenHeight", null, function(response) {
 ```
 
 
-##### `bridge.disableJavscriptAlertBoxSafetyTimeout()`
+### 8.2.4  `bridge.disableJavscriptAlertBoxSafetyTimeout()`
 
-Calling `bridge.disableJavscriptAlertBoxSafetyTimeout()` has the same effect as calling `[bridge disableJavscriptAlertBoxSafetyTimeout];` in ObjC.
+在 ObjC 中，调用 `bridge.disableJavscriptAlertBoxSafetyTimeout()` 与调用 `[bridge disableJavscriptAlertBoxSafetyTimeout];`  具有相同效果。
 
-Example:
-
+实例:
 ```javascript
 bridge.disableJavscriptAlertBoxSafetyTimeout()
 ```
